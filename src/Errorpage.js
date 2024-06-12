@@ -3,12 +3,12 @@
 import React from 'react';
 
 function ErrorPage() {
-  return (
-    <div>
-      <h1>Error</h1>
-      <p>Data fetching failed...</p>
-    </div>
-  );
-}
+    return (
+        <div style={{ color: 'black', fontSize: '64px' }}>
+          Data fetching failed...
+        </div>
+      );
+    }
 
 export default ErrorPage;
+

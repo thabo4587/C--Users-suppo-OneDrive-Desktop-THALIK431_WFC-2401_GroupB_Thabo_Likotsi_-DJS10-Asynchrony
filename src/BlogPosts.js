@@ -1,8 +1,11 @@
+// BlogPosts.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function BlogPosts() {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -15,19 +18,18 @@ function BlogPosts() {
       .then((data) => setPosts(data))
       .catch((error) => {
         setError(error.message);
-        console.error('Error fetching data:', error.message); 
+        console.error('Error fetching data:', error.message);
+        navigate('/error');
       });
-  }, []);
+  }, [navigate]);
 
   return (
     <div>
       <h1>Posts</h1>
-      {error ? (
-        <div style={{ color: 'black', fontSize: '24px' }}>Data fetching failed...</div>
-      ) : (
+      {error ? null : (
         posts.map((post) => (
-          <div key={post.id}>      
-          <h2>{post.title}</h2>
+          <div key={post.id}>
+            <h2>{post.title}</h2>
             <p>{post.body}</p>
           </div>
         ))
